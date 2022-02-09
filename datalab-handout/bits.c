@@ -143,7 +143,7 @@ NOTES:
  */
 int bitXor(int x, int y)
 {
-  return ~(~x & ~y);
+  return ~(~x & ~y) & ~(x & y);
 }
 /* 
  * tmin - return minimum two's complement integer 
@@ -165,7 +165,7 @@ int tmin(void)
  */
 int isTmax(int x)
 {
-  return x;
+  return !(~(x + 1) ^ x) & !!(x ^ 0xffffffff);
 }
 
 /* 
@@ -178,7 +178,7 @@ int isTmax(int x)
  */
 int allOddBits(int x)
 {
-  return 2;
+
 }
 /* 
  * negate - return -x 
