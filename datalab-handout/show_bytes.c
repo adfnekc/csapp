@@ -1,11 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "bits.c"
 #include <ar.h>
 
 typedef unsigned char *byte_pointer;
 
-void ui2bin(unsigned i)
+void u2bin(unsigned i)
 {
     int c;
     int k;
@@ -18,6 +20,23 @@ void ui2bin(unsigned i)
         else
             printf("0");
     }
+}
+
+int b2u(char *n)
+{
+    int bin, dec = 0;
+    unsigned long len = strlen(n);
+    printf("n:%s,len: %lu\n", n, len);
+
+    for (int i = len - 1; i > -1; i--)
+    {
+        int a1 = (*"1");
+        if (n[i] == a1)
+            dec += pow(2, i);
+    }
+
+    printf("dec :%d", dec);
+    return dec;
 }
 
 void test_allOddBits()
@@ -34,5 +53,5 @@ void test_allOddBits()
 
 void main(int argc, char *argv[])
 {
-    ui2bin(0xAAAAAAAA);
+    b2u(argv[1]);
 }
