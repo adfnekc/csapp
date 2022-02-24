@@ -31,8 +31,9 @@ int b2u(char *n)
     for (int i = len - 1; i > -1; i--)
     {
         int a1 = (*"1");
+        // printf("%c,%d\n", n[i], dec);
         if (n[i] == a1)
-            dec += pow(2, i);
+            dec += pow(2, len - i - 1);
     }
 
     printf("dec :%d", dec);

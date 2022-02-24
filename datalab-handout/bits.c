@@ -178,7 +178,7 @@ int isTmax(int x)
  */
 int allOddBits(int x)
 {
-  return x & 0xAAAAAAAA;
+  return !((x & 0xaaaaaaaa) ^ 0xaaaaaaaa);
 }
 /*
  * negate - return -x
@@ -189,7 +189,7 @@ int allOddBits(int x)
  */
 int negate(int x)
 {
-  return 2;
+  return ~x + 1;
 }
 // 3
 /*
@@ -203,7 +203,8 @@ int negate(int x)
  */
 int isAsciiDigit(int x)
 {
-  return 2;
+  int startWith3 = !(x >> 4 ^ 0x3);
+  return startWith3;
 }
 /*
  * conditional - same as x ? y : z
