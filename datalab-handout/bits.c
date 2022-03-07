@@ -203,8 +203,10 @@ int negate(int x)
  */
 int isAsciiDigit(int x)
 {
-  int startWith3 = !(x >> 4 ^ 0x3);
-  return startWith3;
+  int a = x + (~0x30 + 1);
+  int b = 0x39 + (~x + 1);
+
+  return !(a >> 31 || b >> 31);
 }
 /*
  * conditional - same as x ? y : z
