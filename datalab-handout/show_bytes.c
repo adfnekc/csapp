@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include "bits.c"
-#include <ar.h>
 
 typedef unsigned char *byte_pointer;
+double pow(double __x, double __y);
+int isLessOrEqual(int, int);
 
 void u2bin(unsigned i)
 {
@@ -24,7 +24,7 @@ void u2bin(unsigned i)
 
 int b2u(char *n)
 {
-    int bin, dec = 0;
+    int dec = 0;
     unsigned long len = strlen(n);
     printf("n:%s,len: %lu\n", n, len);
 
@@ -33,7 +33,10 @@ int b2u(char *n)
         int a1 = (*"1");
         // printf("%c,%d\n", n[i], dec);
         if (n[i] == a1)
-            dec += pow(2, len - i - 1);
+        {
+            double d = pow(2, len - i - 1);
+            dec += d;
+        }
     }
 
     printf("dec :%d", dec);
@@ -52,7 +55,27 @@ void test_allOddBits()
     }
 }
 
-void main(int argc, char *argv[])
+void test_isLessOrEqual()
 {
-    b2u(argv[1]);
+    int arr[][2] = {0xAAAAAAAA, 0xFFFFFFFD, -3, 1, -1, 0, 0, 0, 1, 5, 0xFFFFFFFD, 0xAAAAAAAA, 1, -3, 0, -1, 5, 1, 0x80000000, 0x7fffffff, 0x80000000, 0x7ffffffe, 0x7fffffff, 0x80000000};
+    int result[] = {1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0};
+    int i = 0;
+    size_t n = sizeof(result) / sizeof(int);
+    for (i = 0; i < n; i++)
+    {
+        int f = isLessOrEqual(arr[i][0], arr[i][1]);
+        if (f != result[i])
+        {
+            printf(" * %d[0x%X] %d[0x%X] %d[0x%X], result should be %d\n", arr[i][0], arr[i][0], arr[i][1], arr[i][1], f, f, result[i]);
+        }
+        else
+        {
+            printf("%d[0x%X] %d[0x%X] %d[0x%X], result should be %d\n", arr[i][0], arr[i][0], arr[i][1], arr[i][1], f, f, result[i]);
+        }
+    }
+}
+
+int main(int argc, char *argv[])
+{
+    test_isLessOrEqual();
 }

@@ -230,8 +230,12 @@ int conditional(int x, int y, int z)
  */
 int isLessOrEqual(int x, int y)
 {
-  return 2;
+  int samesign = !((x >> 31) ^ (y >> 31));
+  int a = !samesign & (x >> 31);
+  int b = samesign & !((y + (~x + 1)) >> 31); //(x + ~y + 1) >> 31; !((y+(~x+1))>>31)
+  return a | b;
 }
+
 // 4
 /*
  * logicalNeg - implement the ! operator, using all of
